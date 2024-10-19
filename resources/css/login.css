@@ -1,0 +1,78 @@
+/* resources/css/login.css */
+
+/* Contenedor principal del login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Para centrar verticalmente */
+    background-color: #0A0A0A; /* Fondo oscuro del contenedor */
+}
+
+/* Caja del login */
+.login-box {
+    background-color: #1E1E1E; /* Fondo de la caja del login */
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Estilos del título del login */
+.login-title {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilos de la imagen de avatar */
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* Estilos de los inputs */
+.form-control {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.form-control::placeholder {
+    color: #AAA;
+}
+
+/* Estilos del botón de login */
+.login-btn {
+    background-color: #768010; /* Verde oscuro */
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background-color: #768010; /* Desactivar el hover */
+}
+
+/* Ajuste de los errores */
+.alert-danger {
+    background-color: #D9534F;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+/* Para alineaciones y otros elementos */
+.mb-3 {
+    margin-bottom: 1.5rem;
+}

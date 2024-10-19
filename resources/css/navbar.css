@@ -1,0 +1,53 @@
+/* Estilos para la barra de navegación personalizada */
+.navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.navbar-left img.avatar {
+    height: 50px;
+    border-radius: 50%;
+}
+
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links li a.nav-link:hover {
+    text-decoration: underline;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+.user-name {
+    color: white;
+    margin-right: 10px;
+}
+
+.logout-icon {
+    height: 30px;
+    cursor: pointer;
+}

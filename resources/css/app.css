@@ -1,0 +1,31 @@
+body {
+    background-color: #0A0A0A; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar, .footer {
+    background-color: #1E1E1E; /* Fondo oscuro para la barra de navegación */
+    color: #FFFFFF;
+}
+
+/* Ajustes para el logo en la barra de navegación */
+.logo-navbar {
+    height: 50px; /* Ajusta la altura del logo */
+    width: auto; /* Mantén la proporción de la imagen */
+    margin-right: 10px; /* Separación entre el logo y los elementos del menú */
+}
+
+
+.footer {
+    background-color: #1E1E1E; /* Color de fondo del footer */
+    color: #7D7D7D;
+}
+
+.container {
+    max-width: 960px;
+}
+

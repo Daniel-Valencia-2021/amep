@@ -1,0 +1,31 @@
+body {
+    background-color: #0A0A0A; /* Color de fondo principal */
+    color: #7D7D7D; /* Color de texto principal */
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar, .footer {
+    background-color: #768010; /* Verde oscuro */
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar .nav-link {
+    color: white;
+}
+
+.navbar .nav-link:hover {
+    color: #7D7D7D; /* Gris claro al hacer hover */
+}
+
+.footer {
+    background-color: #1E1E1E; /* Color de fondo del footer */
+    color: #7D7D7D;
+}
+
+.container {
+    max-width: 960px;
+}
