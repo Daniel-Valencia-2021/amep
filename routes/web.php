@@ -29,13 +29,14 @@ use App\Http\Controllers\EstadisticasController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Rutas de autenticación
 Route::get('login', [AuthController::class, 'loginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login.submit'); // Cambiamos el nombre
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // Proteger las rutas de costos para usuarios autenticados y con rol de admin
 Route::middleware(['auth', 'admin'])->group(function () {
