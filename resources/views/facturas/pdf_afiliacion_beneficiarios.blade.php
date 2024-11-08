@@ -5,91 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura Afiliación Beneficiarios</title>
     <style>
+        /* Tamaño para ticket */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            width: 80mm;
+            margin: 5px;
             color: #333;
+            font-size: 11px;
         }
-        h1, h2, h3 {
+        .header, .footer {
             text-align: center;
-            color: #555;
+            margin-bottom: 5px;
         }
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo img {
-            width: 120px;
+        .header img {
+            width: 50px;
             height: auto;
         }
-        .details, .beneficiarios-details {
-            margin-bottom: 20px;
-        }
-        .details p, .beneficiarios-details p {
+        h1, h2 {
+            font-size: 14px;
             margin: 5px 0;
         }
-        .details strong, .beneficiarios-details strong {
-            color: #555;
+        .association-info p {
+            margin: 2px 0;
+            font-size: 10px;
+        }
+        .details, .beneficiarios-details {
+            margin-bottom: 5px;
+        }
+        .details p, .beneficiarios-details p {
+            margin: 2px 0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 5px;
+            font-size: 10px;
         }
         th, td {
-            padding: 10px;
-            text-align: left;
+            padding: 4px;
             border: 1px solid #ddd;
+            text-align: left;
         }
         th {
             background-color: #f4f4f4;
         }
         .total {
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
             text-align: right;
-            margin-top: 20px;
+            margin-top: 5px;
         }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 12px;
-            color: #777;
+        .signature-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            font-size: 10px;
+        }
+        .signature-line {
+            margin-top: 10px;
+            border-top: 1px solid #000;
+            width: 80px;
+            margin: auto;
         }
     </style>
 </head>
 <body>
-
-    <div class="logo">
+    <div class="header">
         <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa">
+        <h1>Asociación mutual El Paraíso</h1>
+        <h2>Factura de Afiliación - Beneficiarios</h2>
+        <div class="association-info">
+            <p>NIT: 901.157.850 - 7</p>
+            <p>Matrícula mercantil No. 29503371</p>
+            <p>San Isidro, municipio de Rio Quito - Chocó</p>
+        </div>
     </div>
 
-    <h1>Factura de Afiliación - Beneficiarios</h1>
     <p style="text-align: right;"><strong>Fecha de Pago:</strong> {{ now()->format('d/m/Y') }}</p>
 
     <div class="details">
-        <h2>Detalles del Aportante</h2>
-        <p><strong>Nombre:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
+        <p><strong>Nombre Aportante:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
         <p><strong>Cédula:</strong> {{ $aportante->cedula }}</p>
     </div>
 
     <div class="beneficiarios-details">
-        <h2>Detalles de los Beneficiarios</h2>
+        <h3>Beneficiarios</h3>
         <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Tipo de Identificación</th>
-                    <th>Identificación</th>
+                    <th>ID</th>
                     <th>Parentesco</th>
-                    <th>Valor Afiliación</th>
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($beneficiarios as $beneficiario)
                     <tr>
                         <td>{{ $beneficiario->nombres }} {{ $beneficiario->apellidos }}</td>
-                        <td>{{ $beneficiario->tipo_identificacion }}</td>
                         <td>{{ $beneficiario->identificacion }}</td>
                         <td>{{ $beneficiario->parentesco }}</td>
                         <td>${{ number_format($valorAfiliacion, 2) }}</td>
@@ -100,14 +113,27 @@
     </div>
 
     <div class="total">
-        <h3>Total a Pagar por Beneficiarios: ${{ number_format($beneficiarios->count() * $valorAfiliacion, 2) }}</h3>
-        <h3>Total General: ${{ number_format($total, 2) }}</h3>
+        <p>Total Beneficiarios: ${{ number_format($beneficiarios->count() * $valorAfiliacion, 2) }}</p>
+    </div>
+
+    <div class="signature-section">
+        <div>
+            <div class="signature-line"></div>
+            <p>Presidente</p>
+        </div>
+        <div>
+            <div class="signature-line"></div>
+            <p>Tesorero</p>
+        </div>
+        <div>
+            <div class="signature-line"></div>
+            <p>Usuario</p>
+        </div>
     </div>
 
     <div class="footer">
         <p>Gracias por su pago. Si tiene alguna pregunta, no dude en contactarnos.</p>
-        <p>&copy; {{ now()->year }} Empresa. Todos los derechos reservados.</p>
+        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
     </div>
-
 </body>
 </html>

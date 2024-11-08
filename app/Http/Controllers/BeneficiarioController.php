@@ -79,11 +79,11 @@ class BeneficiarioController extends Controller
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'identificacion' => 'required|string|max:20|unique:beneficiarios,identificacion',
+            'tipo_identificacion' => 'required|in:TI,RC', // Validar el tipo de identificación
             'direccion' => 'required|string|max:255',
             'parentesco' => 'required|string|max:50',
             'fecha_nacimiento' => 'required|date',
             'aportante_id' => 'required|exists:aportantes,id',
-            'tipo_identificacion' => 'required|in:TI,RC', // Validar el tipo de identificación
         ]);
 
         // Crear un nuevo beneficiario
@@ -119,11 +119,11 @@ class BeneficiarioController extends Controller
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'identificacion' => 'required|string|max:20|unique:beneficiarios,identificacion,' . $id,
+            'tipo_identificacion' => 'required|in:TI,RC', // Validar el tipo de identificación
             'direccion' => 'required|string|max:255',
             'parentesco' => 'required|string|max:50',
             'fecha_nacimiento' => 'required|date',
             'aportante_id' => 'required|exists:aportantes,id',
-            'tipo_identificacion' => 'required|in:TI,RC', // Validar el tipo de identificación
         ]);
 
         $beneficiario = Beneficiario::findOrFail($id);

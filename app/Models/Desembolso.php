@@ -16,7 +16,8 @@ class Desembolso extends Model
         'cedula_reclamante',
         'telefono_reclamante',
         'parentesco',
-        'valor_desembolso',
+        'costo_id',//borrar en caso de no ser necesario
+        //'valor_desembolso',
         'fecha_desembolso',
     ];
 
@@ -24,5 +25,10 @@ class Desembolso extends Model
     public function muerto()
     {
         return $this->belongsTo(Muerto::class);
+    }
+
+    public function costo()
+    {
+        return $this->belongsTo(Costo::class);
     }
 }

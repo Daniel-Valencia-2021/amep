@@ -11,7 +11,8 @@ class AfiliacionPago extends Model
 
     protected $fillable = [
         'aportante_id',
-        'valor_afiliacion',
+        'costo_id',//borrar en caso de no ser necesario
+        //'valor_afiliacion',
         'valor_mensual_pagado',
         'meses_pagados',
         'total',
@@ -23,5 +24,11 @@ class AfiliacionPago extends Model
     public function aportante()
     {
         return $this->belongsTo(Aportante::class);
+    }
+
+
+    public function costo()
+    {
+        return $this->belongsTo(Costo::class);
     }
 }

@@ -39,11 +39,9 @@ class FacturaAfiliacionController extends Controller
         // Obtener el costo de afiliación
         $costo = Costo::first();
         $valorAfiliacion = $costo->valor_afiliacion;
-
-        // Calcular los meses restantes hasta diciembre
+        $valorMensual = $costo->valor_mensual; // Valor mensual ahora proviene de la tabla de costos
         $mesActual = Carbon::now()->month;
         $mesesRestantes = 12 - $mesActual;
-        $valorMensual = 500; // Valor por cada mes faltante
 
         // Si es para beneficiarios, mostrar solo los que no han pagado
         if ($request->tipo_pago === 'beneficiarios') {
@@ -54,7 +52,6 @@ class FacturaAfiliacionController extends Controller
                 return back()->withErrors(['error' => 'Sin beneficiarios a pagar.']);
             }
 
-            // Pasar la lista de beneficiarios no pagados a la vista
             return view('facturas.afiliacion', compact('aportante', 'valorAfiliacion', 'mesesRestantes', 'valorMensual', 'beneficiarios', 'request'));
         }
 
@@ -70,11 +67,11 @@ class FacturaAfiliacionController extends Controller
             'tipo_pago' => 'required|in:aportante,beneficiarios', // Validar el tipo de pago
         ]);
 
-        // Obtener el aportante
+        // Obtener el aportante y el costo relacionado
         $aportante = Aportante::find($request->aportante_id);
         $costo = Costo::first();
         $valorAfiliacion = $costo->valor_afiliacion;
-        $valorMensual = 500; // Valor mensual
+        $valorMensual = $costo->valor_mensual; // Se toma el valor mensual desde la tabla de costos
         $mesesPagados = $request->meses_pagados ?? 0;
 
         // Calcular el total
@@ -84,7 +81,7 @@ class FacturaAfiliacionController extends Controller
         // Crear el pago en la base de datos
         $pago = AfiliacionPago::create([
             'aportante_id' => $aportante->id,
-            'valor_afiliacion' => $valorAfiliacion,
+            'costo_id' => $costo->id,
             'valor_mensual_pagado' => $valorMensual,
             'meses_pagados' => $mesesPagados,
             'total' => $total,
@@ -97,13 +94,13 @@ class FacturaAfiliacionController extends Controller
             $aportante->update(['afiliacion_pagada' => true]);
             $pdf = PDF::loadView('facturas.pdf_afiliacion_aportante', compact('aportante', 'valorAfiliacion', 'mesesPagados', 'total', 'valorMensual'));
         } else {
-            // Solo actualizar los beneficiarios que no han pagado
+            // Actualizar los beneficiarios que no han pagado
             $beneficiarios = $aportante->beneficiarios->where('afiliacion_pagada', false);
             foreach ($beneficiarios as $beneficiario) {
                 $beneficiario->update(['afiliacion_pagada' => true]);
             }
 
-            // Generar PDF solo para los beneficiarios no pagados
+            // Generar PDF para beneficiarios no pagados
             $pdf = PDF::loadView('facturas.pdf_afiliacion_beneficiarios', compact('aportante', 'beneficiarios', 'valorAfiliacion', 'mesesPagados', 'total', 'valorMensual'));
         }
 

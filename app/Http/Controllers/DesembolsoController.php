@@ -58,7 +58,6 @@ class DesembolsoController extends Controller
         $costo = Costo::first();
         $valorDesembolso = $costo->valor_desembolso * 4;
 
-        // Crear el registro del desembolso
         $desembolso = Desembolso::create([
             'muerto_id' => $request->muerto_id,
             'nombre_reclamante' => $request->nombre_reclamante,
@@ -69,6 +68,9 @@ class DesembolsoController extends Controller
             'valor_desembolso' => $valorDesembolso,
             'fecha_desembolso' => now(),
         ]);
+
+        $desembolso->valor_desembolso = $costo->valor_desembolso * 4;
+        $desembolso->save();
 
         // Generar el PDF con los datos del desembolso y el espacio para las firmas
         $pdf = PDF::loadView('desembolsos.pdf', [

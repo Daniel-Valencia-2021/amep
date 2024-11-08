@@ -16,15 +16,12 @@ class CreateMuertosTable extends Migration
             $table->date('fecha_nacimiento')->nullable();
             $table->date('fecha_fallecimiento');
             $table->unsignedBigInteger('causa_muerte_id')->nullable(false);
-            $table->unsignedBigInteger('aportante_id')->nullable();
             $table->boolean('pagado')->default(false); // Campo para indicar si el fallecido ha sido pagado
             $table->timestamps();
 
             // Relación con la tabla causas_de_muerte
             $table->foreign('causa_muerte_id')->references('id')->on('causas_de_muerte')->onDelete('cascade');
 
-            // Relación con la tabla aportantes
-            $table->foreign('aportante_id')->references('id')->on('aportantes')->onDelete('set null');
         });
     }
 

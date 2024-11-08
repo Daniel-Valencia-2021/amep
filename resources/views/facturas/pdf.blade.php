@@ -3,123 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprobante de Pago</title>
+    <title>Comprobante de Pago - Fallecidos</title>
     <style>
+        /* Formato de ticket */
         body {
             font-family: Arial, sans-serif;
+            font-size: 11px;
+            width: 80mm;
+            margin: 5px;
+            color: #333;
         }
-
-        h1, h2, h3 {
+        h1, h2 {
             text-align: center;
-            color: #2c3e50;
+            margin: 5px 0;
         }
-
-        .container {
-            width: 100%;
-            margin: 0 auto;
-        }
-
         .header, .footer {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
-
-        .header {
-            margin-top: 30px;
+        .header img {
+            width: 50px;
+            height: auto;
         }
-
-        .details {
-            margin-bottom: 20px;
+        .association-info, .details p {
+            font-size: 10px;
+            color: #666;
+            margin: 2px 0;
+            text-align: center;
         }
-
-        .details p {
-            font-size: 14px;
-            line-height: 1.5;
+        .details, .total {
+            margin-bottom: 5px;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            font-size: 10px;
+            margin-bottom: 5px;
         }
-
-        table, th, td {
+        th, td {
+            padding: 3px;
             border: 1px solid #ddd;
-            padding: 8px;
+            text-align: center;
         }
-
         th {
-            background-color: #f2f2f2;
-            text-align: center;
+            background-color: #f4f4f4;
         }
-
-        td {
-            text-align: center;
-        }
-
         .total {
             font-weight: bold;
             text-align: right;
-            margin-right: 10px;
         }
-
-        .signature {
-            margin-top: 40px;
-            text-align: right;
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-top: 10px;
+        }
+        .signature-box {
+            text-align: center;
+            padding-top: 20px;
+        }
+        .signature-line {
+            width: 60px;
+            border-top: 1px solid #000;
+            margin: 2px auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Encabezado -->
-        <div class="header">
-            <h1>Funeraria AMEP</h1>
-            <p>Comprobante de Pago</p>
-            <p>Fecha: {{ $fecha_pago->format('d/m/Y') }}</p>
-        </div>
 
-        <!-- Datos del Aportante -->
-        <div class="details">
-            <h3>Datos del Aportante</h3>
-            <p><strong>Nombre:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
-            <p><strong>Cédula:</strong> {{ $aportante->cedula }}</p>
-            <p><strong>Teléfono:</strong> {{ $aportante->telefono }}</p>
+    <div class="header">
+        <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa">
+        <h1>Asociación mutual El Paraíso</h1>
+        <h2>Comprobante de Pago - Fallecidos</h2>
+        <div class="association-info">
+            <p>NIT: 901.157.850 - 7</p>
+            <p>Matrícula mercantil No. 29503371</p>
+            <p>San Isidro, municipio de Rio Quito - Chocó</p>
         </div>
+        <p><strong>Fecha de Pago:</strong> {{ $fecha_pago->format('d/m/Y') }}</p>
+    </div>
 
-        <!-- Detalles de los Muertos -->
-        <table>
-            <thead>
+    <div class="details">
+        <p><strong>Nombre:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
+        <p><strong>Cédula:</strong> {{ $aportante->cedula }}</p>
+        <p><strong>Teléfono:</strong> {{ $aportante->telefono }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Identificación</th>
+                <th>Fecha de Fallecimiento</th>
+                <th>Causa de Muerte</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($muertos as $muerto)
                 <tr>
-                    <th>Nombre</th>
-                    <th>Identificación</th>
-                    <th>Tipo de Identificación</th>
-                    <th>Fecha de Fallecimiento</th>
-                    <th>Causa de Muerte</th>
+                    <td>{{ $muerto->nombre }}</td>
+                    <td>{{ $muerto->identificacion }}</td>
+                    <td>{{ date('d/m/Y', strtotime($muerto->fecha_fallecimiento)) }}</td>
+                    <td>{{ $muerto->causaDeMuerte->nombre }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($muertos as $muerto)
-                    <tr>
-                        <td>{{ $muerto->nombre }}</td>
-                        <td>{{ $muerto->identificacion }}</td>
-                        <td>{{ $muerto->tipo_identificacion }}</td>
-                        <td>{{ date('d/m/Y', strtotime($muerto->fecha_fallecimiento)) }}</td>
-                        <td>{{ $muerto->causaDeMuerte->nombre }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
 
-        <!-- Total a Pagar -->
-        <div class="total">
-            <h3>Total a Pagar: ${{ number_format($total, 2) }}</h3>
+    <div class="total">
+        <p>Total a Pagar: ${{ number_format($total, 2) }}</p>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <p>Firma del Presidente</p>
         </div>
-
-        <!-- Firma -->
-        <div class="signature">
-            <p>______________________________</p>
-            <p>Firma del Responsable</p>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <p>Firma del Tesorero</p>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <p>Firma del Usuario</p>
         </div>
     </div>
+
+    <div class="footer">
+        <p>Gracias por su pago. Si tiene alguna pregunta, no dude en contactarnos.</p>
+        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
+    </div>
+
 </body>
 </html>

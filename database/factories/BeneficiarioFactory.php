@@ -6,6 +6,7 @@ use App\Models\Beneficiario;
 use App\Models\Aportante; // Si Beneficiario está relacionado con Aportante
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+
 class BeneficiarioFactory extends Factory
 {
     /**

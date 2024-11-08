@@ -13,6 +13,9 @@ use App\Http\Controllers\FacturaHistorialController;
 use App\Http\Controllers\DesembolsoController;
 use App\Http\Controllers\EstadisticasController;
 
+use App\Exports\AportantesExport;
+use App\Exports\BeneficiariosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -72,4 +75,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('desembolsos/guardar', [DesembolsoController::class, 'guardar'])->name('desembolsos.guardar');
 
     Route::get('/estadisticas', [EstadisticasController::class, 'index'])->name('estadisticas.index');
+
+    Route::get('export-aportantes', function () {
+        return Excel::download(new AportantesExport, 'aportantes.xlsx');
+    })->name('export.aportantes');
+    
+    Route::get('export-beneficiarios', function () {
+        return Excel::download(new BeneficiariosExport, 'beneficiarios.xlsx');
+    })->name('export.beneficiarios');
 });

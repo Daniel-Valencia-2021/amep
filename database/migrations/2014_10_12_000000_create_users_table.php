@@ -11,14 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre')->unique();
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
             $table->string('password'); // Sin cifrado, se almacenará como texto
-            $table->enum('role', ['admin', 'secretaria']); // Roles
+            $table->unsignedBigInteger('role_id')->nullable(); // Referencia a la tabla de roles
             $table->timestamps();
+
+            // Definir la clave foránea
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
         });
-        
     }
 
     /**
@@ -27,5 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };

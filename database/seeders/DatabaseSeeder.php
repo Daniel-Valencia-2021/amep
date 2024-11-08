@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\CausaDeMuerte;
 use App\Models\Aportante;
 use App\Models\User;
+use App\Models\Beneficiario;
+use App\Models\Muerto;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,18 +31,29 @@ class DatabaseSeeder extends Seeder
             'afiliacion_pagada' => false,
         ]);
 
-        // Crear el usuario Admin
-        User::create([
-            'username' => 'admin',
-            'password' => 'admin', // Cifrado de la contraseña
-            'role' => 'admin',
-        ]);
+            // Crear roles por defecto
+            $adminRole = Role::create(['nombre' => 'admin']);
+            $secretariaRole = Role::create(['nombre' => 'secretaria']);
+    
+            // Crear el usuario Admin y asignarle el rol
+            User::create([
+                'username' => 'admin',
+                'password' => 'admin', // Cifrado de la contraseña
+                'role_id' => $adminRole->id,
+            ]);
+    
+            // Crear el usuario Secretaria y asignarle el rol
+            User::create([
+                'username' => 'secretaria',
+                'password' => 'secretaria', // Cifrado de la contraseña
+                'role_id' => $secretariaRole->id,
+            ]);
 
-        // Crear el usuario Secretaria
-        User::create([
-            'username' => 'secretaria',
-            'password' => 'secretaria', // Cifrado de la contraseña
-            'role' => 'secretaria',
-        ]);
+        Aportante::factory()->count(20)->create();
+
+        Beneficiario::factory()->count(20)->create();
+
+       // Muerto::factory()->count(30)->create();
+
     }
 }

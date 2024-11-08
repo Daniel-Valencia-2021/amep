@@ -23,9 +23,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('muertos.index') }}">Muertos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('costos.index') }}">Configurar Costos</a>
-                </li>
+
+                <!-- Mostrar "Configurar Costos" solo para admin -->
+                @if(Session::get('user')->hasRole('admin'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('costos.index') }}">Configurar Costos</a>
+                    </li>
+                @endif
 
                 <!-- Menú desplegable para Facturación -->
                 <li class="nav-item dropdown">
@@ -50,13 +54,20 @@
                 </li>
             </ul>
 
-            <!-- Cerrar sesión a la derecha -->
+            <!-- Mostrar nombre del usuario y desplegable de cerrar sesión -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-link nav-link" style="color: white;">Cerrar Sesión</button>
-                    </form>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Session::get('user')->username }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

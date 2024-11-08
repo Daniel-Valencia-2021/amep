@@ -13,11 +13,11 @@ class Beneficiario extends Model
         'nombres',
         'apellidos',
         'identificacion',
+        'tipo_identificacion',
         'direccion',
         'parentesco',
         'fecha_nacimiento',
         'aportante_id',
-        'tipo_identificacion',
         'afiliacion_pagada', // Agregar el campo
     ];
 

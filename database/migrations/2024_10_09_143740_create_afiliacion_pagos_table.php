@@ -14,18 +14,20 @@ class CreateAfiliacionPagosTable extends Migration
         Schema::create('afiliacion_pagos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('aportante_id');
-            $table->decimal('valor_afiliacion', 10, 2);
+            $table->unsignedBigInteger('costo_id')->nullable(); // Clave foránea a costos
+            //$table->decimal('valor_afiliacion', 10, 2);
             $table->decimal('valor_mensual_pagado', 10, 2)->nullable();
             $table->integer('meses_pagados')->nullable();
             $table->decimal('total', 10, 2);
             $table->date('fecha_pago');
-            $table->string('concepto'); // "afiliación de aportante" o "afiliación de beneficiarios"
+            $table->string('concepto');
             $table->timestamps();
-
-            // Clave foránea
+    
             $table->foreign('aportante_id')->references('id')->on('aportantes')->onDelete('cascade');
+            $table->foreign('costo_id')->references('id')->on('costos')->onDelete('set null');
         });
     }
+    
 
     /**
      * Reverse the migrations.

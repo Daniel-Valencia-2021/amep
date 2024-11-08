@@ -13,11 +13,10 @@ class CheckAdminRole
         // Verificar si el usuario está en la sesión
         $user = Session::get('user');
 
-        // Verificar si el usuario existe y es admin
-        if ($user && $user->role === 'admin') {
-            return $next($request); // Permitir acceso si es admin
+        // Verificar si el usuario tiene el rol de admin
+        if ($user->hasRole('admin')) {
+            return $next($request);
         }
-
         // Redirigir si no tiene el rol de admin
         return redirect()->route('aportantes.index')->with('error', 'No tienes acceso a esta sección.');
     }

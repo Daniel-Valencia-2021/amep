@@ -14,7 +14,6 @@
 
         .btn-custom:hover {
             background-color: #6B6B6B;
-            /* Color un poco más oscuro para el hover */
             border-color: #6B6B6B;
         }
 
@@ -22,7 +21,6 @@
             color: #000;
             padding: 8px 16px;
             font-size: 24px;
-            /* Aumenta el tamaño de las flechas */
             border: none;
             background-color: transparent;
         }
@@ -33,7 +31,22 @@
 
         .pagination .page-link:hover {
             color: #007bff;
-            /* Cambia de color al pasar el mouse */
+        }
+
+        /* Ajustes de estilo para los iconos */
+        .action-icon {
+            font-size: 18px;
+        }
+
+        /* Ajustes para el botón de búsqueda */
+        .btn-search {
+            background-color: #7D7D7D;
+            color: white;
+            border: none;
+        }
+
+        .btn-search:hover {
+            background-color: #6B6B6B;
         }
     </style>
 
@@ -45,7 +58,9 @@
             <div class="input-group" style="width: 300px;">
                 <input type="text" class="form-control" name="cedula" placeholder="Buscar aportante por cédula..."
                     aria-label="Buscar aportante" aria-describedby="button-addon2">
-                <button class="btn btn-custom" type="submit" id="button-addon2">Buscar</button>
+                <button class="btn btn-search" type="submit" id="button-addon2">
+                    <i class="fas fa-search"></i> <!-- Ícono de búsqueda -->
+                </button>
             </div>
         </form>
 
@@ -53,6 +68,11 @@
         <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#nuevoAportanteModal">
             Nuevo Aportante
         </button>
+
+        <!-- Botón de exportar a Excel -->
+        <a href="{{ route('export.aportantes') }}" class="btn btn-success">
+            <i class="fas fa-file-excel"></i> Exportar a Excel
+        </a>
     </div>
 
     <!-- Tabla de aportantes -->
@@ -79,13 +99,17 @@
                     <td>{{ $aportante->beneficiarios->count() }}</td>
                     <td class="d-flex">
                         <a href="{{ route('aportantes.edit', $aportante->id) }}"
-                            class="btn btn-custom btn-sm me-2">Editar</a>
+                            class="btn btn-custom btn-sm me-2" title="Editar">
+                            <i class="fas fa-edit action-icon"></i>
+                        </a>
                         <form action="{{ route('aportantes.destroy', $aportante->id) }}" method="POST"
                             style="display:inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-custom btn-sm"
-                                onclick="return confirm('¿Seguro que quieres eliminar este aportante?');">Eliminar</button>
+                            <button class="btn btn-custom btn-sm" title="Eliminar"
+                                onclick="return confirm('¿Seguro que quieres eliminar este aportante?');">
+                                <i class="fas fa-trash action-icon"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -97,7 +121,6 @@
     @if ($aportantes->hasPages())
         <nav aria-label="Page navigation" class="d-flex justify-content-center">
             <ul class="pagination">
-                {{-- Flecha para la página anterior --}}
                 @if ($aportantes->onFirstPage())
                     <li class="page-item disabled">
                         <span class="page-link" aria-hidden="true">&lsaquo;</span>
@@ -109,7 +132,6 @@
                     </li>
                 @endif
 
-                {{-- Flecha para la siguiente página --}}
                 @if ($aportantes->hasMorePages())
                     <li class="page-item">
                         <a class="page-link" href="{{ $aportantes->nextPageUrl() }}" rel="next"

@@ -14,19 +14,21 @@ class CreateDesembolsosTable extends Migration
         Schema::create('desembolsos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('muerto_id');
+            $table->unsignedBigInteger('costo_id')->nullable(); // Clave foránea a costos
             $table->string('nombre_reclamante');
             $table->string('apellidos_reclamante');
             $table->string('cedula_reclamante');
             $table->string('telefono_reclamante');
             $table->string('parentesco');
-            $table->decimal('valor_desembolso', 10, 2);
+            $table->decimal('valor_desembolso', 10, 2)->nullable();
             $table->date('fecha_desembolso');
             $table->timestamps();
-
-            // Relación con la tabla de muertos
+    
             $table->foreign('muerto_id')->references('id')->on('muertos')->onDelete('cascade');
+            $table->foreign('costo_id')->references('id')->on('costos')->onDelete('set null');
         });
     }
+    
 
     /**
      * Reverse the migrations.
