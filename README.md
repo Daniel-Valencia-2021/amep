@@ -1,6 +1,9 @@
 <p align="center"><a href="#" target="_blank"><img src="resources/img/Logo.jpg" width="150" alt="Logo Asociación Mutual El Paraíso"></a></p>
 
 <h1 align="center">Asociación Mutual El Paraíso</h1>
+<p align="center"><a href="#" target="_blank"><img src="resources/img/Logo.jpg" width="150" alt="Logo Asociación Mutual El Paraíso"></a></p>
+
+<h1 align="center">Asociación Mutual El Paraíso</h1>
 
 <p align="center">
 Gestión de aportantes, beneficiarios, y desembolsos.
