@@ -72,7 +72,7 @@
 <body>
 
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa">
+        <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa">
         <h1>Asociación mutual El Paraíso</h1>
         <h2>Comprobante de Pago - Fallecidos</h2>
         <div class="association-info">

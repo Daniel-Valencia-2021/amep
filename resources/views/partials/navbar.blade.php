@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- Logo o título de la aplicación -->
         <a class="navbar-brand" href="#">
-            <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa" class="logo-navbar">
+            <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa" class="logo-navbar">
         </a>
 
         <!-- Botón para el menú en pantallas pequeñas -->

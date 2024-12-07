@@ -93,7 +93,7 @@
     <div class="login-box">
         <div class="login-logo">
             <!-- Logo de la empresa -->
-            <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa" class="avatar">
+            <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa" class="avatar">
         </div>
         <h1 class="login-title">Inicio de sesión</h1>
         @if($errors->any())

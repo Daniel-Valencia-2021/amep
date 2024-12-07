@@ -72,7 +72,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa">
+        <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa">
         <h1>Asociación mutual El Paraíso</h1>
         <div class="association-info">
             <p>NIT: 901.157.850 - 7</p>
