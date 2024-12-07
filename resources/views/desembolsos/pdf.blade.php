@@ -48,7 +48,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/Logo.jpg') }}" alt="Logo Empresa">
+        <img src="resources\img\logo.png" alt="Logo Empresa">
         <h1>Asociación mutual El Paraíso</h1>
         <h2>Comprobante de Desembolso</h2>
         <div class="association-info">
@@ -70,12 +70,14 @@
 
     <div class="signature-section">
         <div>
-            <div class="signature-line"></div>
             <p>Firma de la Funeraria</p>
+
+            <div class="signature-line"></div>
         </div>
         <div>
-            <div class="signature-line"></div>
             <p>Firma del Reclamante</p>
+
+            <div class="signature-line"></div>
         </div>
     </div>
 
