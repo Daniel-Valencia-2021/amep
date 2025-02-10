@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprobante de Pago - Fallecidos</title>
     <style>
-        /* Formato de ticket */
+        /* Estilo optimizado para ticket POS */
         body {
             font-family: Arial, sans-serif;
             font-size: 11px;
@@ -13,25 +13,24 @@
             margin: 5px;
             color: #333;
         }
-        h1, h2 {
-            text-align: center;
-            margin: 5px 0;
-        }
         .header, .footer {
             text-align: center;
             margin-bottom: 5px;
         }
         .header img {
-            width: 50px;
+            width: 60px;
             height: auto;
         }
-        .association-info, .details p {
+        h1, h2 {
+            font-size: 13px;
+            margin: 5px 0;
+        }
+        .association-info p, .details p {
             font-size: 10px;
-            color: #666;
             margin: 2px 0;
             text-align: center;
         }
-        .details, .total {
+        .details {
             margin-bottom: 5px;
         }
         table {
@@ -42,7 +41,7 @@
         }
         th, td {
             padding: 3px;
-            border: 1px solid #ddd;
+            border-bottom: 1px dashed #000;
             text-align: center;
         }
         th {
@@ -51,6 +50,8 @@
         .total {
             font-weight: bold;
             text-align: right;
+            font-size: 12px;
+            margin-top: 5px;
         }
         .signature-section {
             display: flex;
@@ -60,7 +61,7 @@
         }
         .signature-box {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 15px;
         }
         .signature-line {
             width: 60px;
@@ -72,8 +73,8 @@
 <body>
 
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa">
-        <h1>Asociación mutual El Paraíso</h1>
+        <img src="{{ public_path('img/logo.png') }}" alt="Logo Empresa">
+        <h1>Asociación Mutual El Paraíso</h1>
         <h2>Comprobante de Pago - Fallecidos</h2>
         <div class="association-info">
             <p>NIT: 901.157.850 - 7</p>
@@ -93,9 +94,9 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Identificación</th>
-                <th>Fecha de Fallecimiento</th>
-                <th>Causa de Muerte</th>
+                <th>ID</th>
+                <th>Fecha Fallecimiento</th>
+                <th>Causa</th>
             </tr>
         </thead>
         <tbody>
@@ -117,21 +118,21 @@
     <div class="signature-section">
         <div class="signature-box">
             <div class="signature-line"></div>
-            <p>Firma del Presidente</p>
+            <p>Presidente</p>
         </div>
         <div class="signature-box">
             <div class="signature-line"></div>
-            <p>Firma del Tesorero</p>
+            <p>Tesorero</p>
         </div>
         <div class="signature-box">
             <div class="signature-line"></div>
-            <p>Firma del Usuario</p>
+            <p>Usuario</p>
         </div>
     </div>
 
     <div class="footer">
-        <p>Gracias por su pago. Si tiene alguna pregunta, no dude en contactarnos.</p>
-        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
+        <p>Gracias por su pago.</p>
+        <p>&copy; {{ now()->year }} Asociación Mutual El Paraíso.</p>
     </div>
 
 </body>

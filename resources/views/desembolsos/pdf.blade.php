@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprobante de Desembolso</title>
     <style>
-        /* Configuración para formato ticket */
+        /* Estilo optimizado para ticket POS */
         body {
             font-family: Arial, sans-serif;
             font-size: 11px;
@@ -18,26 +18,31 @@
             margin-bottom: 5px;
         }
         .header img {
-            width: 50px;
+            width: 60px;
             height: auto;
         }
         h1, h2 {
-            font-size: 14px;
+            font-size: 13px;
             margin: 5px 0;
         }
         .association-info p, .details p {
             font-size: 10px;
             margin: 2px 0;
+            text-align: center;
         }
         .details {
-            margin-top: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .signature-section {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             font-size: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .signature-box {
+            text-align: center;
+            padding-top: 15px;
         }
         .signature-line {
             width: 70px;
@@ -47,9 +52,10 @@
     </style>
 </head>
 <body>
+
     <div class="header">
-        <img src="resources\img\logo.png" alt="Logo Empresa">
-        <h1>Asociación mutual El Paraíso</h1>
+        <img src="{{ public_path('img/logo.png') }}" alt="Logo Empresa">
+        <h1>Asociación Mutual El Paraíso</h1>
         <h2>Comprobante de Desembolso</h2>
         <div class="association-info">
             <p>NIT: 901.157.850 - 7</p>
@@ -69,20 +75,19 @@
     </div>
 
     <div class="signature-section">
-        <div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
             <p>Firma de la Funeraria</p>
-
-            <div class="signature-line"></div>
         </div>
-        <div>
-            <p>Firma del Reclamante</p>
-
+        <div class="signature-box">
             <div class="signature-line"></div>
+            <p>Firma del Reclamante</p>
         </div>
     </div>
 
     <div class="footer">
-        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
+        <p>&copy; {{ now()->year }} Asociación Mutual El Paraíso.</p>
     </div>
+
 </body>
 </html>

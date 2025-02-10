@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura Afiliación Beneficiarios</title>
     <style>
-        /* Tamaño para ticket */
+        /* Formato ticket para impresora POS */
         body {
             font-family: Arial, sans-serif;
-            width: 80mm;
+            width: 80mm; /* Ancho estándar de tickets */
             margin: 5px;
             color: #333;
             font-size: 11px;
@@ -18,11 +18,11 @@
             margin-bottom: 5px;
         }
         .header img {
-            width: 50px;
+            width: 60px;
             height: auto;
         }
         h1, h2 {
-            font-size: 14px;
+            font-size: 13px;
             margin: 5px 0;
         }
         .association-info p {
@@ -43,7 +43,7 @@
         }
         th, td {
             padding: 4px;
-            border: 1px solid #ddd;
+            border-bottom: 1px dashed #000;
             text-align: left;
         }
         th {
@@ -71,8 +71,8 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa">
-        <h1>Asociación mutual El Paraíso</h1>
+        <img src="{{ public_path('img/logo.png') }}" alt="Logo Empresa">
+        <h1>Asociación Mutual El Paraíso</h1>
         <h2>Factura de Afiliación - Beneficiarios</h2>
         <div class="association-info">
             <p>NIT: 901.157.850 - 7</p>
@@ -84,7 +84,7 @@
     <p style="text-align: right;"><strong>Fecha de Pago:</strong> {{ now()->format('d/m/Y') }}</p>
 
     <div class="details">
-        <p><strong>Nombre Aportante:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
+        <p><strong>Nombre del Aportante:</strong> {{ $aportante->nombres }} {{ $aportante->apellidos }}</p>
         <p><strong>Cédula:</strong> {{ $aportante->cedula }}</p>
     </div>
 
@@ -133,7 +133,7 @@
 
     <div class="footer">
         <p>Gracias por su pago. Si tiene alguna pregunta, no dude en contactarnos.</p>
-        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
+        <p>&copy; {{ now()->year }} Asociación Mutual El Paraíso. Todos los derechos reservados.</p>
     </div>
 </body>
 </html>

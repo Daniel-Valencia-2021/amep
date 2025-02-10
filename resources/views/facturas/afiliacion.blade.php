@@ -156,7 +156,7 @@
 
                 <div class="mb-3">
                     <label for="meses_pagados" class="form-label">Meses a pagar (opcional)</label>
-                    <input type="number" class="form-control" id="meses_pagados" name="meses_pagados" min="0" max="{{ $mesesRestantes }}" value="0">
+                    <input type="number" class="form-control" id="meses_pagados" name="meses_pagados" min="0" max="{{ $mesesRestantes }}">
                 </div>
 
                 <button type="submit" class="btn btn-success btn-pagar">Pagar</button>

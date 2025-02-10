@@ -59,6 +59,12 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="valor_mensual" class="form-label">Valor Mensual</label>
+                    <input type="number" class="form-control" id="valor_mensual" name="valor_mensual" 
+                           value="{{ $costos ? $costos->valor_mensual : 0 }}" step="0.01" required>
+                </div>
+
+                <div class="mb-3">
                     <label for="valor_muerto" class="form-label">Valor por Fallecido</label>
                     <input type="number" class="form-control" id="valor_muerto" name="valor_muerto" 
                            value="{{ $costos ? $costos->valor_muerto : 0 }}" step="0.01" required>

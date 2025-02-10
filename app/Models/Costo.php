@@ -12,7 +12,8 @@ class Costo extends Model
     protected $fillable = [
         'valor_afiliacion',
         'valor_muerto',
-        'valor_desembolso'
+        'valor_desembolso',
+        'valor_mensual' 
     ];
 
 }

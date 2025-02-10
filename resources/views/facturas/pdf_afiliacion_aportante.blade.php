@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura Afiliación Aportante</title>
     <style>
-        /* Tamaño para ticket */
+        /* Estilo optimizado para impresión POS */
         body {
             font-family: Arial, sans-serif;
-            width: 80mm;
+            width: 80mm; /* Ancho típico de impresoras POS */
             margin: 0;
-            padding: 10px;
+            padding: 5px;
+            font-size: 11px;
             color: #333;
-            font-size: 12px;
         }
         .header, .footer {
             text-align: center;
@@ -21,66 +21,58 @@
         .header img {
             width: 50px;
             height: auto;
+            margin-bottom: 5px;
         }
         h1, h2 {
-            font-size: 14px;
+            font-size: 13px;
             margin: 5px 0;
         }
-        .association-info p {
-            margin: 2px 0;
-            font-size: 10px;
-        }
         .details, .payment-details {
-            margin: 10px 0;
+            margin: 5px 0;
         }
         .details p, .payment-details p {
             margin: 2px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+        th, td {
+            padding: 4px;
+            border-bottom: 1px dashed #000; /* Línea punteada para separar filas */
+            text-align: left;
         }
         .total {
             font-size: 12px;
             font-weight: bold;
             text-align: right;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 5px;
-            font-size: 10px;
-        }
-        th, td {
-            padding: 5px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
         .signature-section {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: space-between;
+            margin-top: 10px;
             font-size: 10px;
             text-align: center;
         }
         .signature-line {
-            margin-top: 20px;
             border-top: 1px solid #000;
-            width: 80px;
-            margin: auto;
+            width: 50px;
+            margin: 10px auto 2px auto;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo Empresa">
-        <h1>Asociación mutual El Paraíso</h1>
-        <div class="association-info">
+        <img src="{{ public_path('img/Logo.png') }}" alt="Logo Empresa" style="max-width: 80px; height: auto;">
+        <h1>Asociación Mutual El Paraíso</h1>
+        <div>
             <p>NIT: 901.157.850 - 7</p>
             <p>Matrícula mercantil No. 29503371</p>
-            <p>San Isidro, municipio de Rio Quito - Chocó</p>
+            <p>San Isidro, Rio Quito - Chocó</p>
         </div>
-        <h2>Factura de Afiliación - Aportante</h2>
-        <p><strong>Fecha de Pago:</strong> {{ now()->format('d/m/Y') }}</p>
+        <h2>Factura de Afiliación</h2>
+        <p><strong>Fecha:</strong> {{ now()->format('d/m/Y') }}</p>
     </div>
 
     <div class="details">
@@ -88,23 +80,16 @@
         <p><strong>Cédula:</strong> {{ $aportante->cedula }}</p>
     </div>
 
-    <div class="payment-details">
-        <p><strong>Valor de Afiliación:</strong> ${{ number_format($valorAfiliacion, 2) }}</p>
-        <p><strong>Meses Pagados:</strong> {{ $mesesPagados }}</p>
-        <p><strong>Valor Mensual:</strong> ${{ number_format($valorMensual, 2) }}</p>
-        <p class="total"><strong>Total a Pagar:</strong> ${{ number_format($total, 2) }}</p>
-    </div>
-
     <table>
         <thead>
             <tr>
-                <th>Detalle</th>
+                <th>Concepto</th>
                 <th>Valor</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Valor Afiliación</td>
+                <td>Afiliación</td>
                 <td>${{ number_format($valorAfiliacion, 2) }}</td>
             </tr>
             <tr>
@@ -122,7 +107,6 @@
         </tbody>
     </table>
 
-    <!-- Sección de firmas -->
     <div class="signature-section">
         <div>
             <div class="signature-line"></div>
@@ -139,8 +123,8 @@
     </div>
 
     <div class="footer">
-        <p>Gracias por su pago. Si tiene alguna pregunta, no dude en contactarnos.</p>
-        <p>&copy; {{ now()->year }} Asociación mutual El Paraíso. Todos los derechos reservados.</p>
+        <p>Gracias por su pago.</p>
+        <p>&copy; {{ now()->year }} Asociación Mutual El Paraíso.</p>
     </div>
 </body>
 </html>
